@@ -94,7 +94,6 @@ class MainService {
 		try {
 			let guest;
 
-			// Remove the unused `guest` variable
 			let guestExists = await this.#guestService.getGuestByContact(
 				payload.contact
 			);
@@ -115,7 +114,7 @@ class MainService {
 				guest = await this.#guestService.findById(payload.id);
 			} else {
 				if (payload.isAttending) {
-					if (guestExists) {
+					if (!guestExists) {
 						const token = this.#helper.generateRandomString(16);
 						const newGuest = await this.#guestService.create({
 							name: payload.name,
