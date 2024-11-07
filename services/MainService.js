@@ -98,15 +98,21 @@ class MainService {
 				payload.contact
 			);
 
-			if (guestExists) {
-				callback({
-					status: 400,
-					error: "You have previously registered",
-				});
-				return;
+			if (!guestExists) {
+				guestExists = await this.#guestService.getGuestByName(
+					payload.name
+				);
 			}
 
-			guestExists = await this.#guestService.getGuestByName(payload.name);
+			if (guestExists.used) {
+				if (!payload.isAttending) {
+					callback({
+						status: 400,
+						error: "You have previously registered",
+					});
+					return;
+				}
+			}
 
 			if (guestExists) {
 				callback({
