@@ -37,6 +37,8 @@ class Startup {
 			const password = this.#helper.generateRandomString(8);
 			const token = this.#helper.generateRandomString(32);
 
+			console.log(password);
+
 			const admin = {
 				emailAddress: "bakarepraise3@gmail.com",
 				type: 2,
