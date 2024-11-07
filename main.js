@@ -17,13 +17,13 @@ main = () => {
     let server = new Server(config.server.port);
     server.start();
     
-    // let db = new DatabaseEngine();
+    let db = new DatabaseEngine();
 
-    // db.connect(async() => {
-    //   let server = new Server(config.server.port);
-    //   await start.startMigration();
-    //   server.start();
-    // });
+    db.connect(async() => {
+      let server = new Server(config.server.port);
+      await start.startMigration();
+      server.start();
+    });
 
   } catch (e) {
     logger.error(e)
