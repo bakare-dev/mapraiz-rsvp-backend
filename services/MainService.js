@@ -94,6 +94,7 @@ class MainService {
 		try {
 			let guest;
 
+			// Remove the unused `guest` variable
 			let guestExists = await this.#guestService.getGuestByContact(
 				payload.contact
 			);
@@ -102,24 +103,6 @@ class MainService {
 				guestExists = await this.#guestService.getGuestByName(
 					payload.name
 				);
-			}
-
-			if (guestExists.used) {
-				if (!payload.isAttending) {
-					callback({
-						status: 400,
-						error: "You have previously registered",
-					});
-					return;
-				}
-			}
-
-			if (guestExists) {
-				callback({
-					status: 400,
-					error: "You have previously registered",
-				});
-				return;
 			}
 
 			if (payload.id) {
@@ -132,21 +115,23 @@ class MainService {
 				guest = await this.#guestService.findById(payload.id);
 			} else {
 				if (payload.isAttending) {
-					const token = this.#helper.generateRandomString(16);
-					const newGuest = await this.#guestService.create({
-						name: payload.name,
-						contact: payload.contact,
-						token,
-						taggingAlong: payload.totalAttendees - 1,
-						isAttending: payload.isAttending,
-						used: true,
-					});
+					if (guestExists) {
+						const token = this.#helper.generateRandomString(16);
+						const newGuest = await this.#guestService.create({
+							name: payload.name,
+							contact: payload.contact,
+							token,
+							taggingAlong: payload.totalAttendees - 1,
+							isAttending: payload.isAttending,
+							used: true,
+						});
 
-					if (!newGuest.id) {
-						callback({ status: 500, error: "Try again later" });
-						return;
+						if (!newGuest.id) {
+							callback({ status: 500, error: "Try again later" });
+							return;
+						}
+						guest = newGuest;
 					}
-					guest = newGuest;
 				}
 			}
 
