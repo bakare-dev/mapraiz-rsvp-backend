@@ -159,7 +159,7 @@ class MainService {
 					name: payload.name,
 					isAttending: payload.isAttending,
 					taggingAlong: payload.totalAttendees - 1,
-					token: guest.token,
+					token: guest.token || "",
 				},
 			};
 
