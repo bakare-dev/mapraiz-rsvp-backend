@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSVP Confirmation - Dr Bola Talabi Reese 80th Birthday</title>
+    <title>RSVP - Dr Bola Talabi Reese 80th Birthday</title>
     <style>
         body {
             font-family: 'Skia', sans-serif;
@@ -61,10 +61,9 @@
             font-weight: bold;
         }
 
-        .view-invitation {
+        .change-your-mind {
             display: inline-block;
             margin-top: 20px;
-            padding: 10px 15px;
             color: #7a7272;
             font-weight: bold;
             text-align: center;
@@ -74,15 +73,14 @@
 
 <body>
     <div class="email-container">
-        <h2 class="heading">RSVP Confirmation - Dr Bola Talabi Reese 80th Birthday</h2>
+        <h2 class="heading">RSVP - Dr Bola Talabi Reese 80th Birthday</h2>
 
         <div class="confirmation-message">
             <p>Dear <%= name %>,</p>
-            <p>Thank you for your RSVP! We are excited to have you join us in celebrating Dr. Bola Talabi Reese's 80th
-                birthday!</p>
-            <p>You mentioned that you will be bringing 2 additional guests. We look forward to celebrating with you all!
-            </p>
-            <p>Here are the details for the event:</p>
+            <p>Thank you for your response. We understand that you will not be able to attend Dr. Bola Talabi Reese's
+                80th birthday celebration. We're sorry that you won't be joining us, but we appreciate your
+                consideration.</p>
+            <p>If you change your mind and would like to attend, simply click the link below to update your RSVP:</p>
         </div>
 
         <div class="event-details">
@@ -90,15 +88,11 @@
             <p><strong>Date:</strong> December 21, 2024</p>
             <p><strong>Time:</strong> 2:00 PM - 7:00 PM</p>
             <p><strong>Venue:</strong> The Lamplighter Restaurant, 6566 Route 22, Delmont PA 15626, USA</p>
-            <p><strong>We can't wait to celebrate with you!</strong></p>
-
-            <a href="https://calendar.google.com/calendar/r/eventedit?text=Dr+Bola+Talabi+Reese+80th+Birthday+Celebration&dates=20241221T140000/20241221T190000&details=Celebrate+Dr.+Bola+Talabi+Reese's+80th+Birthday!&location=The+Lamplighter+Restaurant,+6566+Route+22,+Delmont+PA+15626,+USA"
-                target="_blank" class="add-to-calendar">Add to Google Calendar</a>
         </div>
 
         <div class="confirmation-message">
             <a href="https://mapraiz-rsvp.vercel.app/invite/?type=guest&kpk=<%= token %>" target="_blank"
-                class="view-invitation">View your invitation</a>
+                class="change-your-mind">Change your mind?</a>
         </div>
 
         <div class="footer">

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New RSVP - Dr Bola Talabi Reese 80th Birthday</title>
+    <style>
+        body {
+            font-family: 'Skia', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .email-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .heading {
+            text-align: center;
+            font-size: 24px;
+            color: #2c3e50;
+        }
+
+        .message-container {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .message-box {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-style: italic;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <h2 class="heading">New RSVP - Dr Bola Talabi Reese 80th Birthday</h2>
+
+        <div class="message-container">
+            <p>Hello,</p>
+            <p>We are pleased to inform you that <%= name %> has just registered and will be attending the Dr. Bola Talabi
+                Reese 80th Birthday Celebration!</p>
+
+            <% if (message !="" ) { %>
+                <p>Additionally, <%= name %> has left a message for you:</p>
+
+                <div class="message-box">
+                    <p>"<%= message %>"</p>
+                </div>
+                <% } %>
+
+                    <p>We look forward to seeing <%= name %> and celebrating together!</p>
+        </div>
+
+        <div class="footer">
+            <p>Organized by Mapraiz LLC</p>
+        </div>
+    </div>
+</body>
+
+</html>

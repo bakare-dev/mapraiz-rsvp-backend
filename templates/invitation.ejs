@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr Bola Talabi Reese 80th Birthday Invitation</title>
+    <style>
+        body {
+            font-family: 'Skia', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .email-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .view-card {
+            display: inline-block;
+            padding: 10px 15px;
+            color: #5f5959;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px auto;
+            background-color: transparent;
+        }
+
+        .envelope {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            height: 400px;
+            background-color: #c3c29b;
+            color: #000;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            flex-direction: column;
+        }
+
+        .stamp {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 100px;
+            height: 100px;
+            background-color: rgb(203, 180, 50);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            transform: rotate(-15deg);
+        }
+
+        .event-details {
+            margin-top: 20px;
+            text-align: center;
+            /* Center the text */
+        }
+
+        .add-to-calendar {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #72612f;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <h2>Dr Bola Talabi Reese 80th Birthday Invitation</h2>
+
+        <a href="https://mapraiz-rsvp.vercel.app/invite/?type=guest&kpk=<%= token %>" target="_blank"
+            class="view-card">View Card</a>
+
+        <a href="https://mapraiz-rsvp.vercel.app/invite/?type=guest&kpk=<%= token %>" target="_blank" class="envelope">
+            <div class="stamp">Sealed</div>
+            <%= name %>
+        </a>
+
+        <div class="event-details">
+            <h3>Event Details</h3>
+            <p><strong>Dr. Bola Talabi Reese 80th Birthday Celebration</strong></p>
+            <p><strong>Date:</strong> 12/21/24</p>
+            <p><strong>Venue:</strong> The Lamplighter Restaurant<br>6566 Route 22, Delmont PA 15626, USA</p>
+            <p><strong>Time:</strong> 2:00 PM until 7:00 PM</p>
+
+            <a href="https://calendar.google.com/calendar/r/eventedit?text=Dr+Bola+Talabi+Reese+80th+Birthday+Celebration&dates=20241221T140000/20241221T190000&details=Celebrate+Dr.+Bola+Talabi+Reese's+80th+Birthday!&location=The+Lamplighter+Restaurant,+6566+Route+22,+Delmont+PA+15626,+USA"
+                target="_blank" class="add-to-calendar">Add to Google Calendar</a>
+        </div>
+
+        <div class="footer">
+            <p>Organized by Mapraiz LLC</p>
+        </div>
+    </div>
+</body>
+
+</html>

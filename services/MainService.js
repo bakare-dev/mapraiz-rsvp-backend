@@ -142,16 +142,6 @@ class MainService {
 				});
 			}
 
-			const guestNotificationPayload = {
-				recipients: [payload.contact],
-				data: {
-					name: payload.name,
-					isAttending: payload.isAttending,
-					taggingAlong: payload.totalAttendees - 1,
-					token: guest.token,
-				},
-			};
-
 			const users = await this.#userService.fetchAll({});
 			const emails = users.rows.map((user) => user.emailAddress);
 
@@ -164,7 +154,38 @@ class MainService {
 				},
 			};
 
-			callback({ status: 200, data: { message: "Guest added" } });
+			const guestNotificationPayload = {
+				recipients: [payload.contact],
+				data: {
+					name: payload.name,
+					isAttending: payload.isAttending,
+					taggingAlong: payload.totalAttendees - 1,
+					token: guest.token,
+				},
+			};
+
+			if (guestNotificationPayload.data.isAttending) {
+				this.#notificationService.sendAttendingNotification(
+					guestNotificationPayload,
+					(resp) => {}
+				);
+
+				this.#notificationService.sendAdminAttendingNotification(
+					userNotificationPayload,
+					(resp) => {}
+				);
+			} else {
+				this.#notificationService.sendNotAttendingNotification(
+					guestNotificationPayload,
+					(resp) => {}
+				);
+				this.#notificationService.sendAdminNotAttendingNotification(
+					userNotificationPayload,
+					(resp) => {}
+				);
+			}
+
+			callback({ status: 200, data: { message: "Thank you" } });
 		} catch (err) {
 			this.#logger.error(err.message);
 			callback({ status: 500, error: "Internal server error" });
@@ -209,6 +230,11 @@ class MainService {
 					token: newGuest.token,
 				},
 			};
+
+			this.#notificationService.sendInvitationNotification(
+				guestNotificationPayload,
+				(resp) => {}
+			);
 
 			callback({ status: 200, data: { message: "Guest added" } });
 		} catch (err) {
