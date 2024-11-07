@@ -125,7 +125,7 @@ class MainService {
 
 				guest = await this.#guestService.findById(payload.id);
 			} else {
-				if (isAttending) {
+				if (payload.isAttending) {
 					const token = this.#helper.generateRandomString(16);
 					const newGuest = await this.#guestService.create({
 						name: payload.name,
@@ -215,7 +215,7 @@ class MainService {
 				recipients: [payload.contact],
 				data: {
 					name: payload.name,
-					token: guest.token,
+					token: newGuest.token,
 				},
 			};
 
