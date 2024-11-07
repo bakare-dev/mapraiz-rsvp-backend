@@ -19,22 +19,18 @@ Message.init(
 			type: DataTypes.STRING(500),
 			allowNull: false,
 		},
-		read: {
+		isRead: {
 			type: DataTypes.BOOLEAN,
 			default: false,
 		},
+		name: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		}
 	},
 	{
 		sequelize: dbEngine.getConnectionManager(),
 	}
 );
-
-Guest.hasOne(Message, {
-	foreignKey: {
-		name: "GuestId",
-		allowNull: false,
-	},
-});
-Message.belongsTo(Guest);
 
 module.exports = Message;

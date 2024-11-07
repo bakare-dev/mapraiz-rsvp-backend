@@ -80,7 +80,7 @@ class Server {
 			res.status(200).json(healthInfo);
 		});
 
-		this.#app.use("/api/v1/main", new MainRoute().getRouter());
+		this.#app.use("/api/v1/", new MainRoute().getRouter());
 
 		this.#app.get("/", (req, res) => {
 			const message = {

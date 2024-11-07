@@ -24,15 +24,14 @@ User.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        activated: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false
-        },
         type: {
             type: DataTypes.INTEGER, // 1-admin, 2-user
             allowNull: false
         },
+        token: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
     },
     {
         sequelize: dbEngine.getConnectionManager()

@@ -35,19 +35,19 @@ class Startup {
 	#userCheck = async () => {
 		try {
 			const password = this.#helper.generateRandomString(8);
+			const token = this.#helper.generateRandomString(32);
+
 			const admin = {
 				emailAddress: "bakarepraise3@gmail.com",
 				type: 2,
-				activated: 1,
 				password: await bcrypt.hash(password, 10),
+				token: token,
 			};
 
-			const hasUserAdded = await new Promise((resolve, reject) => {
-				this.#userDService.findUserByEmailAddress(
-					"bakarepraise3@gmail.com",
-					(resp) => resolve(resp)
-				);
-			});
+			const hasUserAdded = await this.#userDService.getUserByEmail(
+				"bakarepraise3@gmail.com",
+				(resp) => resolve(resp)
+			);
 
 			if (hasUserAdded) {
 				this.#logger.info("Admin existed");
@@ -61,7 +61,7 @@ class Startup {
 				return;
 			}
 
-			// let url = "https://admin.vercel.app"
+			// let url = "https://mapraiz-rsvp.vercel.app/sign-in"
 
 			// const userNotification = {
 			//     recipients: [ "bakarepraise3@gmail.com" ],

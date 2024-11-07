@@ -5,9 +5,9 @@ const User = require("./User");
 
 const dbEngine = new DatabaseEngine();
 
-class UserProfile extends Model {}
+class Guest extends Model {}
 
-UserProfile.init(
+Guest.init(
 	{
 		id: {
 			type: DataTypes.UUID,
@@ -23,10 +23,18 @@ UserProfile.init(
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
+		taggingAlong: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0,
+		},
 		token: {
 			type: DataTypes.STRING,
 		},
-		willAttend: {
+		isAttending: {
+			type: DataTypes.BOOLEAN,
+			default: false,
+		},
+		used: {
 			type: DataTypes.BOOLEAN,
 			default: false,
 		},
@@ -36,4 +44,4 @@ UserProfile.init(
 	}
 );
 
-module.exports = UserProfile;
+module.exports = Guest;
