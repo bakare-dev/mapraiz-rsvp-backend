@@ -113,24 +113,28 @@ class MainService {
 
 				guest = await this.#guestService.findById(payload.id);
 			} else {
-				if (payload.isAttending) {
-					if (!guestExists) {
-						const token = this.#helper.generateRandomString(16);
-						const newGuest = await this.#guestService.create({
-							name: payload.name,
-							contact: payload.contact,
-							token,
-							taggingAlong: payload.totalAttendees - 1,
-							isAttending: payload.isAttending,
-							used: true,
-						});
+				if (!guestExists) {
+					const token = this.#helper.generateRandomString(16);
+					const newGuest = await this.#guestService.create({
+						name: payload.name,
+						contact: payload.contact,
+						token,
+						taggingAlong: payload.totalAttendees - 1,
+						isAttending: payload.isAttending,
+						used: true,
+					});
 
-						if (!newGuest.id) {
-							callback({ status: 500, error: "Try again later" });
-							return;
-						}
-						guest = newGuest;
+					if (!newGuest.id) {
+						callback({ status: 500, error: "Try again later" });
+						return;
 					}
+					guest = newGuest;
+				} else {
+					callback({
+						status: 400,
+						error: "Check your mail for your invitation link",
+					});
+					return;
 				}
 			}
 
@@ -139,8 +143,9 @@ class MainService {
 					message: payload.message,
 					name: payload.name,
 				});
+			} else {
+				payload.message = "";
 			}
-
 
 			const userNotificationPayload = {
 				recipients: ["bakarepraise3@gmail.com"],
@@ -148,6 +153,7 @@ class MainService {
 					name: payload.name,
 					isAttending: payload.isAttending,
 					taggingAlong: payload.totalAttendees - 1,
+					message: payload.message,
 				},
 			};
 
