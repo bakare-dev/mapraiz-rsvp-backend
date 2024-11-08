@@ -104,10 +104,17 @@ class MainService {
 				);
 			}
 
+			let taggingAlong;
+			if (payload.totalAttendees > 1) {
+				taggingAlong = payload.totalAttendees - 1;
+			} else {
+				taggingAlong = 0;
+			}
+
 			if (payload.id) {
 				await this.#guestService.update(payload.id, {
 					isAttending: payload.isAttending,
-					taggingAlong: payload.totalAttendees - 1,
+					taggingAlong,
 					used: true,
 				});
 
@@ -119,7 +126,7 @@ class MainService {
 						name: payload.name,
 						contact: payload.contact,
 						token,
-						taggingAlong: payload.totalAttendees - 1,
+						taggingAlong,
 						isAttending: payload.isAttending,
 						used: true,
 					});
@@ -152,7 +159,7 @@ class MainService {
 				data: {
 					name: payload.name,
 					isAttending: payload.isAttending,
-					taggingAlong: payload.totalAttendees - 1,
+					taggingAlong,
 					message: payload.message,
 				},
 			};
@@ -162,7 +169,7 @@ class MainService {
 				data: {
 					name: payload.name,
 					isAttending: payload.isAttending,
-					taggingAlong: payload.totalAttendees - 1,
+					taggingAlong,
 					token: guest.token || "",
 				},
 			};
@@ -212,13 +219,11 @@ class MainService {
 	addGuest = async (payload, callback) => {
 		try {
 			const token = this.#helper.generateRandomString(16);
+
 			const newGuest = await this.#guestService.create({
 				name: payload.name,
 				contact: payload.contact,
 				token,
-				taggingAlong: payload.totalAttendees - 1,
-				isAttending: payload.isAttending,
-				used: true,
 			});
 
 			if (!newGuest.id) {
