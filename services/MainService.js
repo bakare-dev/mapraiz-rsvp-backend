@@ -141,11 +141,9 @@ class MainService {
 				});
 			}
 
-			const users = await this.#userService.fetchAll({});
-			const emails = users.rows.map((user) => user.emailAddress);
 
 			const userNotificationPayload = {
-				recipients: emails,
+				recipients: ["bakarepraise3@gmail.com"],
 				data: {
 					name: payload.name,
 					isAttending: payload.isAttending,

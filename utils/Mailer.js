@@ -5,77 +5,78 @@ const Logger = require("./Logger");
 
 let instance;
 class Mailer {
+	#transporter;
+	#logger;
 
-    #transporter;
-    #logger;
+	constructor() {
+		if (instance) return instance;
 
-    constructor() {
+		this.#transporter = nodemailer.createTransport({
+			host: infrastructure.smtp.host,
+			port: infrastructure.smtp.port,
+			secure: false,
+			auth: {
+				user: infrastructure.smtp.user,
+				pass: infrastructure.smtp.password,
+			},
+		});
 
-        if (instance) return instance;
+		this.#logger = new Logger().getLogger();
 
-        this.#transporter = nodemailer.createTransport({
-            host: infrastructure.smtp.host,
-            port: infrastructure.smtp.port,
-            secure: false,
-            auth: {
-                user: infrastructure.smtp.user,
-                pass: infrastructure.smtp.password
-            }
-        })
+		instance = this;
+	}
 
-        this.#logger = new Logger().getLogger()
+	sendMail = (info, callback) => {
+		const timeoutId = setTimeout(() => {
+			this.#logger.error("Mail sending timeout exceeded 3 minutes");
+			callback({
+				status: "failed",
+				message: "Mail sending timeout exceeded 3 minutes",
+			});
+		}, 180000);
 
-        instance = this;
-    }
+		try {
+			ejs.renderFile(
+				process.cwd() + "/templates/" + info.templateFile,
+				info.data,
+				(err, data) => {
+					if (err) {
+						clearTimeout(timeoutId);
+						this.#logger.error(err);
+						callback({ status: "failed", message: err.message });
+						return;
+					}
 
-    sendMail = (info, callback) => {
+					let message = {
+						from: info.sender,
+						to: info.recipients,
+						subject: info.subject,
+						html: data,
+						attachments: info.attachments || [],
+					};
 
-        // Start a 3-minute timeout
-        const timeoutId = setTimeout(() => {
-            this.#logger.error("Mail sending timeout exceeded 3 minutes");
-            callback({ status: "failed", message: "Mail sending timeout exceeded 3 minutes" });
-        }, 180000); // 180,000 milliseconds (3 minutes)
+					this.#transporter.sendMail(message, (err, info) => {
+						clearTimeout(timeoutId);
 
-        try {
+						if (err) {
+							this.#logger.error(err);
+							callback({
+								status: "failed",
+								message: err.message,
+							});
+							return;
+						}
 
-            ejs.renderFile(process.cwd() + "/templates/" + info.templateFile, info.data, (err, data) => {
-
-                if (err) {
-                    clearTimeout(timeoutId); // Clear timeout if an error occurs
-                    this.#logger.error(err);
-                    callback({ status: "failed", message: err.message });
-                    return;
-                }
-
-                let message = {
-                    from: info.sender,
-                    to: info.recipients,
-                    subject: info.subject,
-                    html: data
-                }
-
-                this.#transporter.sendMail(message, (err, info) => {
-                    clearTimeout(timeoutId); // Clear timeout after mail is sent
-
-                    if (err) {
-                        this.#logger.error(err);
-                        callback({ status: "failed", message: err.message });
-                        return;
-                    }
-
-                    callback({ status: "success", message: info });
-                });
-
-            });
-
-        } catch (e) {
-            clearTimeout(timeoutId); // Clear timeout in case of an exception
-            this.#logger.error(e);
-            callback({ status: "failed", message: e.message });
-        }
-
-    }
-
+						callback({ status: "success", message: info });
+					});
+				}
+			);
+		} catch (e) {
+			clearTimeout(timeoutId);
+			this.#logger.error(e);
+			callback({ status: "failed", message: e.message });
+		}
+	};
 }
 
 module.exports = Mailer;

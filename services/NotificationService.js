@@ -20,6 +20,13 @@ class Service {
 				subject: "Dr Bola Talabi Reese 80th Birthday Invitation",
 				recipients: item,
 				data: message.data,
+				attachments: [
+					{
+						filename:
+							"Dr Bola Talabi Reese 80th Birthday Invitation",
+						path: process.cwd() + "/tempFiles/card.png",
+					},
+				],
 			};
 
 			this.#mailer.sendMail(info, (response) => {
@@ -37,6 +44,13 @@ class Service {
 					"RSVP Confirmation - Dr Bola Talabi Reese 80th Birthday",
 				recipients: item,
 				data: message.data,
+				attachments: [
+					{
+						filename:
+							"Dr Bola Talabi Reese 80th Birthday Invitation",
+						path: process.cwd() + "/tempFiles/card.png",
+					},
+				],
 			};
 
 			this.#mailer.sendMail(info, (response) => {
