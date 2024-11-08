@@ -155,7 +155,10 @@ class MainService {
 			}
 
 			const userNotificationPayload = {
-				recipients: ["bakarepraise3@gmail.com"],
+				recipients: [
+					"bakarepraise04@gmail.com",
+					"bakaresolabomi@gmail.com",
+				],
 				data: {
 					name: payload.name,
 					isAttending: payload.isAttending,
