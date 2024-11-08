@@ -17,13 +17,13 @@ class Service {
 			let info = {
 				sender: "noreply@mapraizllc.com",
 				templateFile: "invitation.ejs",
-				subject: "Dr Bola Talabi Reese 80th Birthday Invitation",
+				subject: "Dr. Bola Talabi Reese 80th Birthday Invitation",
 				recipients: item,
 				data: message.data,
 				attachments: [
 					{
 						filename:
-							"Dr Bola Talabi Reese 80th Birthday Invitation.png",
+							"Dr. Bola Talabi Reese 80th Birthday Invitation.png",
 						path: process.cwd() + "/tempFiles/card.png",
 						contentType: "image/png",
 					},
@@ -42,13 +42,13 @@ class Service {
 				sender: "noreply@mapraizllc.com",
 				templateFile: "attending.ejs",
 				subject:
-					"RSVP Confirmation - Dr Bola Talabi Reese 80th Birthday",
+					"RSVP Confirmation - Dr. Bola Talabi Reese 80th Birthday",
 				recipients: item,
 				data: message.data,
 				attachments: [
 					{
 						filename:
-							"Dr Bola Talabi Reese 80th Birthday Invitation",
+							"Dr. Bola Talabi Reese 80th Birthday Invitation",
 						path: process.cwd() + "/tempFiles/card.png",
 					},
 				],
@@ -65,7 +65,7 @@ class Service {
 			let info = {
 				sender: "noreply@mapraizllc.com",
 				templateFile: "admin-attending.ejs",
-				subject: "RSVP Update - Dr Bola Talabi Reese 80th Birthday",
+				subject: "RSVP Update - Dr. Bola Talabi Reese 80th Birthday",
 				recipients: item,
 				data: message.data,
 			};
@@ -81,7 +81,7 @@ class Service {
 			let info = {
 				sender: "noreply@mapraizllc.com",
 				templateFile: "notattending.ejs",
-				subject: "RSVP - Dr Bola Talabi Reese 80th Birthday",
+				subject: "RSVP - Dr. Bola Talabi Reese 80th Birthday",
 				recipients: item,
 				data: message.data,
 			};
@@ -97,7 +97,7 @@ class Service {
 			let info = {
 				sender: "noreply@mapraizllc.com",
 				templateFile: "admin-notattending.ejs",
-				subject: "RSVP Update - Dr Bola Talabi Reese 80th Birthday",
+				subject: "RSVP Update - Dr. Bola Talabi Reese 80th Birthday",
 				recipients: item,
 				data: message.data,
 			};
