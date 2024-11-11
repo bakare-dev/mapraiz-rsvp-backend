@@ -23,9 +23,9 @@ class Service {
 				attachments: [
 					{
 						filename:
-							"Dr. Bola Talabi Reese 80th Birthday Invitation.png",
-						path: process.cwd() + "/tempFiles/card.png",
-						contentType: "image/png",
+							"Dr. Bola Talabi Reese 80th Birthday Invitation.jpeg",
+						path: process.cwd() + "/tempFiles/card.jpeg",
+						contentType: "image/jpeg",
 					},
 				],
 			};
@@ -49,7 +49,7 @@ class Service {
 					{
 						filename:
 							"Dr. Bola Talabi Reese 80th Birthday Invitation",
-						path: process.cwd() + "/tempFiles/card.png",
+						path: process.cwd() + "/tempFiles/card.jpeg",
 					},
 				],
 			};
