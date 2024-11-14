@@ -144,7 +144,9 @@ class MainService {
 							used: true,
 						});
 
-						guest = await this.#guestService.findById(payload.id);
+						guest = await this.#guestService.findById(
+							guestExists.id
+						);
 					} else {
 						callback({
 							status: 400,
