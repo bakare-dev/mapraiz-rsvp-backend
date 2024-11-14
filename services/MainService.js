@@ -137,11 +137,21 @@ class MainService {
 					}
 					guest = newGuest;
 				} else {
-					callback({
-						status: 400,
-						error: "Check your mail for your invitation link",
-					});
-					return;
+					if (!guestExists.used) {
+						await this.#guestService.update(guestExists.id, {
+							isAttending: payload.isAttending,
+							taggingAlong,
+							used: true,
+						});
+
+						guest = await this.#guestService.findById(payload.id);
+					} else {
+						callback({
+							status: 400,
+							error: "Check your mail for your invitation link",
+						});
+						return;
+					}
 				}
 			}
 
